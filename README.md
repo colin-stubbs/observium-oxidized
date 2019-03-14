@@ -112,12 +112,32 @@ cd /path/to/your/observium
 patch -Np1 -i /path/to/the/patch/observium_r9768_oxidized.diff
 ```
 
+Tested against latest Observium trunk and stable as of right now, refer to revisions in output below.
+
 Output should look something like this,
 
 ```
 [root@box observium]# rm -rf test
 [root@box observium]# cp -R observium-trunk test
 [root@box observium]# cd test
+[root@box test]# svn info | grep Revision
+Revision: 9773
+[root@box test]#
+[root@box test]# patch -Np1 -i ../observium_r9768_oxidized.diff
+patching file html/api/v0/includes/oxidized.inc.php
+patching file html/api/v0/index.php
+patching file includes/definitions/transports.inc.php
+patching file includes/alerting/oxidized.inc.php
+patching file includes/defaults.inc.php
+patching file html/pages/device/showtech.inc.php
+patching file html/pages/device.inc.php
+patching file html/pages/device/showconfig.inc.php
+[root@box test]# cd
+[root@box observium]# rm -rf test
+[root@box observium]# cp -R observium-stable test
+[root@box observium]# cd test
+[root@box test]# svn info | grep Revision
+Revision: 9773
 [root@box test]# patch -Np1 -i ../observium_r9768_oxidized.diff
 patching file html/api/v0/includes/oxidized.inc.php
 patching file html/api/v0/index.php
@@ -178,4 +198,3 @@ Observium can dump what it knows about a device. Oxidized support has been added
 1. Improve Observium API endpoint for Oxidized so it can filter for the actual devices we want it to collect config for. e.g. using names, model/device types etc.
 
 # EOF
-
