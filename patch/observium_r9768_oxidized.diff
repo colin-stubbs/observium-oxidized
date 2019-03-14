@@ -46,7 +46,7 @@ diff -u -r --new-file observium-trunk/html/api/v0/index.php root/html/api/v0/ind
 @@ -130,6 +130,20 @@
    )
  );
- 
+
 +$config['transports']['oxidized'] = array(
 +  'name' => 'Oxidized',
 +  'identifiers' => array('url'),
@@ -58,7 +58,7 @@ diff -u -r --new-file observium-trunk/html/api/v0/index.php root/html/api/v0/ind
 +      'header_name' => array('description' => 'Auth header name', 'tooltip' => 'Header name, e.g. Authorization'),
 +      'header_value' => array('description' => 'Auth header value', 'tooltip' => 'Header value, e.g. Basic YWRtaW46RklYTUU='),
 +    ),
-+  ) 
++  )
 +);
 +
  $config['transports']['redoxygen'] = array(
@@ -100,18 +100,10 @@ diff -u -r --new-file observium-trunk/includes/alerting/oxidized.inc.php root/in
 +// EOF
 --- observium-trunk/includes/defaults.inc.php	2019-03-12 10:16:27.934447072 +1000
 +++ root/includes/defaults.inc.php	2019-03-12 18:51:20.754345397 +1000
-@@ -231,6 +231,7 @@
- $config['autodiscovery']['proxmox']        = FALSE; // Autodiscover hosts found via Proxmox VE agent app (beware timeouts during poller!)
- $config['autodiscovery']['ip_nets']        = array("127.0.0.0/8", "192.168.0.0/16", "10.0.0.0/8", "172.16.0.0/12");  // Networks to permit autodiscovery
- $config['autodiscovery']['ping_skip']      = FALSE; // Skip icmp echo checks during autodiscovery (beware timeouts during discovery!)
-+$config['autodiscovery']['snmp_skip']      = FALSE; // Skip SNMP polling during autodiscovery
- $config['autodiscovery']['require_hostname']  = TRUE;   // If TRUE, devices must have valid resolvable hostname (in DNS or /etc/hosts)
- 
- $config['discover_services']               = FALSE; // Autodiscover services via SNMP on devices of type "server"
 @@ -521,6 +522,12 @@
  $config['rancid_revisions']             = 10; // Show such last count revisions in device page
  #$config['collectd_dir']                 = '/var/lib/collectd/rrd';
- 
+
 +// Oxidized Web Integration
 +$config['oxidized']['web']['enable']         = FALSE; // Disable by default, user needs to define
 +$config['oxidized']['web']['url']            = 'http://127.0.0.1:8888'; // Default is on same box
@@ -124,9 +116,9 @@ diff -u -r --new-file observium-trunk/includes/alerting/oxidized.inc.php root/in
 --- observium-trunk/html/pages/device/showtech.inc.php	2019-02-15 14:43:01.948652515 +1000
 +++ root/html/pages/device/showtech.inc.php	2019-03-13 22:43:38.915463867 +1000
 @@ -79,6 +79,54 @@
- 
+
    echo generate_box_close();
- 
+
 +  $box_args = array('title' => 'Oxidized',
 +                    'header-border' => TRUE,
 +                    'padding' => TRUE,
@@ -189,7 +181,7 @@ diff -u -r --new-file observium-trunk/includes/alerting/oxidized.inc.php root/in
 +      }
 +
        $device_config_file = get_rancid_filename($device['hostname']);
- 
+
        // Print the config tab if we have a device config
 -      if ($device_config_file)
 +      if ($device_config_file || $oxidized_hostpath)
@@ -201,7 +193,7 @@ diff -u -r --new-file observium-trunk/includes/alerting/oxidized.inc.php root/in
 @@ -80,6 +80,70 @@
      if ($rev['count']) { $rev['type'] = 'git'; }
    }
- 
+
 +  // Oxidized Integration
 +  // NOTE: we check $rev['type'] to determine if a config has already been found via cvs or git, if so Oxidized will not be used for this device
 +  if (!isset($rev['type'])
