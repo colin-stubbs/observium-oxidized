@@ -7,7 +7,7 @@ Patch and instructions on how to use Oxidized for Observium
 1. Add proper Oxidized support to based on interaction with the Oxidized Web REST API **NOT** file or local repo access
 2. Avoid breaking current RANCID support
 3. Allow simultaneous RANCID & Oxidized usage
-4. Present current RANCID based code detected config in preference to Oxidized to allow migration by users
+4. Present current Oxidized based config info in preference to existing RANCID based code detected config info
 5. Support basic auth controlled access to Oxidized REST API from Observium, e.g. as enforced by Apache/nginx/etc or other middle box
 
 Reference info:
@@ -137,6 +137,11 @@ Clicking on "Show difference with previous revision (REV):" will show you the di
 Clicking on other config revisions will show you the config and offer a diff, provided it's not the first revision, in which case there's no diff :-)
 ![ASAv Latest Config First Revision](/screenshots/asa_3.png?raw=true "ASAv 1 Latest Config First Revision")
 
+## Device with an existing RANCID code detected config, no Oxidized config
+
+![Show Tech RANCID Config No Oxidized Config](/screenshots/existing_rancid_device_with_no_oxidized_config.png?raw=true "Show Tech RANCID Config No Oxidized Config")
+
+![Show Tech Both RANCID Config And Oxidized Config](/screenshots/asa_with_existing_rancid_config_and_oxidized_config.png?raw=true "Show Tech Both RANCID Config And Oxidized Config")
 
 ### Creating an Oxidized API Alert Contact
 
