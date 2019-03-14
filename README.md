@@ -115,7 +115,19 @@ patch -Np1 -i /path/to/the/patch/observium_r9768_oxidized.diff
 Output should look something like this,
 
 ```
-TBI
+[root@box observium]# rm -rf test
+[root@box observium]# cp -R observium-trunk test
+[root@box observium]# cd test
+[root@box test]# patch -Np1 -i ../observium_r9768_oxidized.diff
+patching file html/api/v0/includes/oxidized.inc.php
+patching file html/api/v0/index.php
+patching file includes/definitions/transports.inc.php
+patching file includes/alerting/oxidized.inc.php
+patching file includes/defaults.inc.php
+patching file html/pages/device/showtech.inc.php
+patching file html/pages/device.inc.php
+patching file html/pages/device/showconfig.inc.php
+[root@box test]#
 ```
 
 ## Observium WebUI Interactions
