@@ -87,6 +87,10 @@ The important part above is the source http configuration.
 
 This is telling Oxidized to talk to the Observium API to obtain a host list to attempt to obtain configurations from.
 
+NOTE: Oxidized will currently get a list of ALL devices that Observium knows about. If it doesn't know how to talk to a particular model it won't try (refer to the model map for some mappings I use to change Observium device types to Oxidized device models, e.g. CheckPoint GAiA and Cisco...)
+
+WARNING: For everything Oxidized thinks it does know how to talk to it WILL attempt to do so; which may lead to lots of failed auth attempt logs in your environment if the account it's trying to use can't access the device.
+
 NOTE: Observium does not have credentials for the devices. You MUST configure these as default values within the oxidized configuration, utilise SSH key based auth, and/or modify model or group specific vars to ensure Oxidized will be able to login and run the commands it needs to run.
 
 ## Example Observium Config Modifications
@@ -149,3 +153,10 @@ This is what an alert contact should basically look like,
 Observium can dump what it knows about a device. Oxidized support has been added here alongside the existing RANCID support.
 
 ![ASAv Firewall - Observium Show Tech](/screenshots/asa_show_tech.png?raw=true "ASAv Firewall - Observium Show Tech")
+
+# TODO
+
+1. Improve Observium API endpoint for Oxidized so it can filter for the actual devices we want it to collect config for. e.g. using names, model/device types etc.
+
+# EOF
+
