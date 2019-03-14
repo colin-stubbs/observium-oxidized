@@ -11,6 +11,7 @@ Patch and instructions on how to use Oxidized for Observium
 5. Support basic auth controlled access to Oxidized REST API from Observium, e.g. as enforced by Apache/nginx/etc or other middle box
 
 Reference info:
+0. https://docs.observium.org/rancid/
 1. https://github.com/ytti/oxidized
 2. https://github.com/ytti/oxidized-web
 
