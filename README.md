@@ -198,5 +198,6 @@ Observium can dump what it knows about a device. Oxidized support has been added
 2. Improve Observium API endpoint for Oxidized so it can filter for the actual devices we want it to collect config for. e.g. using names, model/device types etc.
 3. Cleanup code generally - still a bit hacky.
 4. Add Oxidized options to web settings editor for integrations, e.g. at /settings/section=integration/
+5. Only select devices that are enabled, e.g. SELECT * FROM devices WHERE disabled = 0; etc
 
 # EOF
