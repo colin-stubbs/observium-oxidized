@@ -197,5 +197,6 @@ Observium can dump what it knows about a device. Oxidized support has been added
 1. Move some of the code that communications with Oxidized API into helper functions within includes/functions.inc.php alongside get_rancid_filename()
 2. Improve Observium API endpoint for Oxidized so it can filter for the actual devices we want it to collect config for. e.g. using names, model/device types etc.
 3. Cleanup code generally - still a bit hacky.
+4. Add Oxidized options to web settings editor for integrations, e.g. at /settings/section=integration/
 
 # EOF
